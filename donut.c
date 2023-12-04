@@ -1,5 +1,5 @@
 /* Donut that can run on an embedded system... 
-   Originally written by Nicolás Kennedy <xrop@xrop.me>
+   Originally written by Nicolás Kennedy <nicolas@nicbk.com>
    Licensed under the UNLICENSE (See LICENSE)
  */
 
