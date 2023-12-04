@@ -8,7 +8,7 @@
 #define TRUE 1 // makes the infinite loop @ line #138 look prettier
 
 // Absolute value function for doubles
-double abs(double x)
+double abs_c(double x)
 {
     if (x < 0)
     {
@@ -33,7 +33,7 @@ unsigned long long fac(unsigned char x)
 
 // Exponential function
 // Ignores edge cases such as indeterminate forms for simplicity
-double pow(double x, unsigned char n)
+double pow_c(double x, unsigned char n)
 {
     if (n == 0)
     {
@@ -66,7 +66,7 @@ double sin(double x)
     }
 
     x -= PI*translation;
-    if ((int) abs(translation) % 2 == 1)
+    if ((int) abs_c(translation) % 2 == 1)
     {
         x = -x;
     }
@@ -75,7 +75,7 @@ double sin(double x)
 
     for (int i = 0; i < 9; ++i)
     {
-        sum += pow(-1, i) * pow(x, 2*i + 1) / fac(2*i + 1);
+        sum += pow_c(-1, i) * pow_c(x, 2*i + 1) / fac(2*i + 1);
     }
 
     return sum;
@@ -98,15 +98,15 @@ double tan(double x)
 // of less than 0.001
 double sqrt_imp(double x, double n)
 {
-    double y = x - (pow(x, 2) - n) / (2 * x);
+    double y = x - (pow_c(x, 2) - n) / (2 * x);
 
-    if (abs(y - x) < 0.001)
+    if (abs_c(y - x) < 0.001)
     {
         return x;
     }
     else
     {
-        return sqrt_imp(x, n);
+        return sqrt_imp(y, n);
     }
 }
 
@@ -137,7 +137,7 @@ void render()
     double torcirrad = 1.5; // Radius of a circular cross section of the torus
 
     double torx = 0; // Translation of torus on the X axis
-    double tory = 0; // Translation of torus on the Y axis
+    double tory = 2; // Translation of torus on the Y axis
     double torz = 7; // Translation of torus on the Z axis
 
     double drot = 0.01; // Step at which torus is rotated
@@ -212,7 +212,7 @@ void render()
                     // If any part of the torus is rendering outside of the camera's viewport,
                     // then skip the rendering of that part of the torus to prevent accessing
                     // invalid coordinates outside of the screen's dimensions
-                    if (abs(x * zp / (zp + z)) > 4 || abs(y * zp / (zp + z)) > viewport)
+                    if (abs_c(x * zp / (zp + z)) > 4 || abs_c(y * zp / (zp + z)) > viewport)
                     {
                         continue;
                     }
@@ -254,7 +254,7 @@ void render()
                         double lightrayz = lightz - z;
 
                         // Calculate distance between the directional light source and the point on the torus
-                        double lightraymag = sqrt(pow(lightrayx, 2) + pow(lightrayy, 2) + pow(lightrayz, 2));
+                        double lightraymag = sqrt(pow_c(lightrayx, 2) + pow_c(lightrayy, 2) + pow_c(lightrayz, 2));
 
                         // Scale the segment down to a length of one,
                         // creating a normalized vector representing a ray of light with constant luminosity
